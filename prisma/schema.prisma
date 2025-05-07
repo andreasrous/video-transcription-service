@@ -14,6 +14,44 @@ model User {
   email    String @unique
   password String
 
+  videos Video[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Video {
+  id                  String              @id @default(uuid())
+  userId              String
+  originalFilename    String
+  storagePath         String
+  fileSizeBytes       BigInt
+  uploadTimestamp     DateTime            @default(now())
+  transcriptionStatus TranscriptionStatus @default(PENDING)
+  statusUpdatedAt     DateTime?
+
+  user       User        @relation(fields: [userId], references: [id])
+  transcript Transcript?
+
+  @@index([userId])
+  @@index([transcriptionStatus])
+}
+
+model Transcript {
+  id               String   @id @default(uuid())
+  videoId          String   @unique
+  transcriptText   String
+  whisperModelUsed String?
+  createdAt        DateTime @default(now())
+
+  video Video @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@index([videoId])
+}
+
+enum TranscriptionStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
 }

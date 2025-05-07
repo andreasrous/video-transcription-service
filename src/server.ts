@@ -2,6 +2,7 @@ import express from 'express';
 import config from './config/config';
 import { notFound, errorHandler } from './middlewares/errorMiddleware';
 import authRoutes from './routes/authRoutes';
+import videoRoutes from './routes/videoRoutes';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use('/auth', authRoutes);
+app.use('/videos', videoRoutes);
 
 // error handling
 app.use(notFound);
