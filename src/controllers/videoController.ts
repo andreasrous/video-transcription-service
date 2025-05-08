@@ -4,6 +4,8 @@ import { db } from '../utils/db';
 import fs from 'fs';
 import { TranscriptionStatus } from '../../generated/prisma';
 import config from '../config/config';
+import { fork } from 'child_process';
+import path from 'path';
 
 // @desc   Upload a new video file
 // @route  POST /videos/upload
@@ -41,8 +43,11 @@ export const uploadVideo = asyncHandler(async (req, res) => {
       },
     });
 
-    // Simulate async transcription trigger (e.g., queue)
-    console.log(`Transcription job triggered for video ${video.id}`);
+    const child = fork(
+      path.resolve(__dirname, '../workers/transcriptionWorkerProcess.ts'),
+    );
+
+    child.send({ videoId: video.id, filePath });
 
     res.status(202).json({
       videoId: video.id,

@@ -7,6 +7,8 @@ interface Config {
   nodeEnv: string;
   jwtSecret: string;
   maxFileSizeBytes: number;
+  openaiApiKey: string;
+  openaiWhisperModel: string;
 }
 
 const config: Config = {
@@ -14,6 +16,8 @@ const config: Config = {
   nodeEnv: process.env.NODE_ENV || 'development',
   jwtSecret: process.env.JWT_SECRET!,
   maxFileSizeBytes: parseInt(process.env.MAX_FILE_SIZE_BYTES!),
+  openaiApiKey: process.env.OPENAI_API_KEY!,
+  openaiWhisperModel: process.env.OPENAI_WHISPER_MODEL!,
 };
 
 export default config;
