@@ -1,8 +1,8 @@
 import express from 'express';
-import config from './config/config';
-import { notFound, errorHandler } from './middlewares/errorMiddleware';
-import authRoutes from './routes/authRoutes';
-import videoRoutes from './routes/videoRoutes';
+import config from './config/config.js';
+import { notFound, errorHandler } from './middlewares/errorMiddleware.js';
+import authRoutes from './routes/authRoutes.js';
+import videoRoutes from './routes/videoRoutes.js';
 
 const app = express();
 

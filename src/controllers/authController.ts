@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import config from '../config/config';
-import { db } from '../utils/db';
+import config from '../config/config.js';
+import { db } from '../utils/db.js';
 import asyncHandler from 'express-async-handler';
 
 // @desc   Register a new user

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import config from '../config/config';
+import config from '../config/config.js';
 
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
   const error = new Error(`Not Found - ${req.originalUrl}`);

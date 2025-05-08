@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { protect } from '../middlewares/authMiddleware';
+import { protect } from '../middlewares/authMiddleware.js';
 import {
   deleteVideo,
   downloadTranscript,
   getVideoById,
   listVideos,
   uploadVideo,
-} from '../controllers/videoController';
+} from '../controllers/videoController.js';
 
 const router = Router();
 

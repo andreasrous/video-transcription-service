@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import { db } from '../utils/db';
+import { db } from '../utils/db.js';
 import fs from 'fs';
-import { TranscriptionStatus } from '../../generated/prisma';
-import config from '../config/config';
+import { TranscriptionStatus } from '../../generated/prisma/index.js';
+import config from '../config/config.js';
 import { fork } from 'child_process';
 import path from 'path';
 

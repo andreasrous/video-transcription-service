@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import config from '../config/config';
-import { db } from '../utils/db';
+import config from '../config/config.js';
+import { db } from '../utils/db.js';
 import { Request, Response, NextFunction } from 'express';
 
 export const protect = async (
