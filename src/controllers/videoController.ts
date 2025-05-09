@@ -5,6 +5,7 @@ import fs from 'fs';
 import { TranscriptionStatus } from '../../generated/prisma/index.js';
 import config from '../config/config.js';
 import { fork } from 'child_process';
+import { fileURLToPath } from 'url';
 import path from 'path';
 
 // @desc   Upload a new video file
@@ -43,6 +44,9 @@ export const uploadVideo = asyncHandler(async (req, res) => {
       },
     });
 
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
     const child = fork(
       path.resolve(__dirname, '../workers/transcriptionWorkerProcess.ts'),
     );
@@ -55,7 +59,8 @@ export const uploadVideo = asyncHandler(async (req, res) => {
       status: video.transcriptionStatus.toLowerCase(),
       message: 'Upload successful, processing started',
     });
-  } catch {
+  } catch (err) {
+    console.error('Error saving video to database:', err);
     fs.unlinkSync(filePath);
     res.status(500).json({ error: 'Error saving video to database' });
   }

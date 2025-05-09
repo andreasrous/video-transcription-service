@@ -7,10 +7,11 @@ import {
   listVideos,
   uploadVideo,
 } from '../controllers/videoController.js';
+import { upload } from '../middlewares/uploadMiddleware.js';
 
 const router = Router();
 
-router.post('/upload', protect, uploadVideo);
+router.post('/upload', protect, upload.single('file'), uploadVideo);
 router.get('/', protect, listVideos);
 router.get('/:videoId', protect, getVideoById);
 router.delete('/:videoId', protect, deleteVideo);
